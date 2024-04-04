@@ -11,7 +11,7 @@ export const createUser = async (req, res) => {
     });
 
     if (findUser) {
-      res.json({ status: 400, message: "Email already exists." });
+      return res.json({ status: 400, message: "Email already exists." });
     }
 
     const newUser = await prisma.user.create({
@@ -22,13 +22,17 @@ export const createUser = async (req, res) => {
       },
     });
 
-    res.json({
+    return res.json({
       status: 200,
       data: newUser,
       message: "User created successfully!",
     });
   } catch (e) {
-    res.json({ status: 400, message: "Failed to create new user.", error: e });
+    return res.json({
+      status: 400,
+      message: "Failed to create new user.",
+      error: e,
+    });
   }
 };
 
@@ -44,11 +48,14 @@ export const loginUser = async (req, res) => {
     });
 
     if (result) {
-      res.json({ status: 200, message: "Login successful!" });
+      return res.json({ status: 200, message: "Login successful!" });
     } else {
-      res.json({ status: 400, message: "Email or password doesn't match." });
+      return res.json({
+        status: 400,
+        message: "Email or password doesn't match.",
+      });
     }
   } catch (e) {
-    res.json({ status: 400, message: "Failed to login.", error: e });
+    return res.json({ status: 400, message: "Failed to login.", error: e });
   }
 };
