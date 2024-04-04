@@ -34,4 +34,5 @@ model Product {
   rentingPrice Int
   views Int @default(0)
   createdAt DateTime @default(now())
+  createdBy String
 }
