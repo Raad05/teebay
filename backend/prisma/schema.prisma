@@ -21,3 +21,15 @@ model User {
   password String
   createdAt DateTime @default(now())
 }
+
+// Product model
+model Product {
+  id Int @id @default(autoincrement())
+  name String
+  description String
+  categories String[]
+  sellingPrice Int
+  rentingPrice Int
+  views Int
+  createdAt DateTime @default(now())
+}
