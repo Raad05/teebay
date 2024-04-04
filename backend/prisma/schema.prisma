@@ -30,6 +30,6 @@ model Product {
   categories String[]
   sellingPrice Int
   rentingPrice Int
-  views Int
+  views Int @default(0)
   createdAt DateTime @default(now())
 }

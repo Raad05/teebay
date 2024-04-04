@@ -17,7 +17,7 @@ CREATE TABLE "Product" (
     "categories" TEXT[],
     "sellingPrice" INTEGER NOT NULL,
     "rentingPrice" INTEGER NOT NULL,
-    "views" INTEGER NOT NULL,
+    "views" INTEGER NOT NULL DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Product_pkey" PRIMARY KEY ("id")
