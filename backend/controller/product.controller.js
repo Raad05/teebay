@@ -1,6 +1,6 @@
 import prisma from "../db/db.config";
 
-export const createProduct = async () => {
+export const createProduct = async (req, res) => {
   try {
     const product = req.body;
 
