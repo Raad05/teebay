@@ -35,8 +35,8 @@ model Product {
   views Int @default(0)
   createdAt DateTime @default(now())
   createdBy String
-  boughtBy String
-  soldBy String
-  borrowedBy String
-  lentBy String
+  boughtBy String @default("N/A")
+  soldBy String @default("N/A")
+  borrowedBy String @default("N/A")
+  lentBy String @default("N/A")
 }
