@@ -4,7 +4,7 @@ export const createUser = async (req, res) => {
   try {
     const data = req.body;
 
-    const findUser = await prisma.user.findUnique({
+    const findUser = await prisma.user.findFirst({
       where: {
         OR: [{ email: data.email }, { phoneNumber: data.phoneNumber }],
       },
