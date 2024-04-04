@@ -1,5 +1,6 @@
 import express, { json, urlencoded } from "express";
 import cors from "cors";
+import routes from "./routes/index.js";
 
 const app = express();
 
@@ -11,6 +12,9 @@ app.use(cors());
 // body parser
 app.use(json());
 app.use(urlencoded({ extended: true }));
+
+// routes
+app.use(routes);
 
 const main = async () => {
   try {
