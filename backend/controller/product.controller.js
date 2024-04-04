@@ -67,7 +67,7 @@ export const updateProduct = async (req, res) => {
     const productId = req.params.id;
     const data = req.body;
 
-    await prisma.product.update({
+    const updatedProduct = await prisma.product.update({
       where: {
         id: Number(productId),
       },
@@ -76,6 +76,7 @@ export const updateProduct = async (req, res) => {
 
     return res.json({
       status: 200,
+      data: updatedProduct,
       message: "Product updated successfully!",
     });
   } catch (e) {
