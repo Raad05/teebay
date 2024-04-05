@@ -1,4 +1,4 @@
-import prisma from "../db/db.config";
+import prisma from "../db/db.config.js";
 
 export const createRecord = async (req, res) => {
   try {
