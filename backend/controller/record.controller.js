@@ -20,3 +20,20 @@ export const createRecord = async (req, res) => {
     });
   }
 };
+
+export const getRecords = async (req, res) => {
+  try {
+    const result = await prisma.record.findMany({});
+
+    return res.json({
+      status: 200,
+      data: result,
+    });
+  } catch (e) {
+    return res.json({
+      status: 400,
+      message: "Failed to fetch records.",
+      error: e,
+    });
+  }
+};
