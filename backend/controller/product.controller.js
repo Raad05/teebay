@@ -39,6 +39,50 @@ export const getAllProducts = async (req, res) => {
   }
 };
 
+export const getProductsByUser = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const result = await prisma.product.findMany({
+      where: {
+        userId: Number(userId),
+      },
+    });
+
+    return res.json({
+      status: 200,
+      data: result,
+    });
+  } catch (e) {
+    return res.json({
+      status: 400,
+      message: "Failed to fetch products",
+      error: e,
+    });
+  }
+};
+
+export const getProductById = async (req, res) => {
+  try {
+    const productId = req.params.id;
+    const result = await prisma.product.findUnique({
+      where: {
+        id: Number(productId),
+      },
+    });
+
+    return res.json({
+      status: 200,
+      data: result,
+    });
+  } catch (e) {
+    return res.json({
+      status: 400,
+      message: "Failed to fetch products",
+      error: e,
+    });
+  }
+};
+
 export const deleteProduct = async (req, res) => {
   try {
     const productId = req.params.id;
