@@ -16,6 +16,8 @@ datasource db {
 // User model
 model User {
   id Int @id @default(autoincrement())
+  products Product[]
+  records Record[]
   firstName String
   lastName String
   address String
@@ -27,6 +29,9 @@ model User {
 // Product model
 model Product {
   id Int @id @default(autoincrement())
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  records Record[]
+  userId Int
   name String
   description String
   categories String[]
@@ -34,9 +39,14 @@ model Product {
   rentingPrice Int
   views Int @default(0)
   createdAt DateTime @default(now())
-  createdBy String
-  boughtBy String @default("N/A")
-  soldBy String @default("N/A")
-  borrowedBy String @default("N/A")
-  lentBy String @default("N/A")
+}
+
+model Record {
+  id Int @id @default(autoincrement())
+  product Product @relation(fields: [productId], references: [id])
+  productId Int
+  user User @relation(fields: [userId], references: [id])
+  userId Int
+  recordType String
+  createdAt DateTime @default(now())
 }

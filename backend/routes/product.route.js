@@ -2,14 +2,14 @@ import { Router } from "express";
 import {
   createProduct,
   deleteProduct,
-  getProducts,
+  getAllProducts,
   updateProduct,
 } from "../controller/product.controller.js";
 
 const router = Router();
 
 router.post("/createProduct", createProduct);
-router.get("/getProducts", getProducts);
+router.get("/getAllProducts", getAllProducts);
 router.put("/updateProduct/:id", updateProduct);
 router.delete("/deleteProduct/:id", deleteProduct);
 
