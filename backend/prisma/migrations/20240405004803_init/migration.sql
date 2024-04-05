@@ -14,6 +14,7 @@ CREATE TABLE "User" (
 -- CreateTable
 CREATE TABLE "Product" (
     "id" SERIAL NOT NULL,
+    "userId" INTEGER NOT NULL,
     "name" TEXT NOT NULL,
     "description" TEXT NOT NULL,
     "categories" TEXT[],
@@ -21,13 +22,19 @@ CREATE TABLE "Product" (
     "rentingPrice" INTEGER NOT NULL,
     "views" INTEGER NOT NULL DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "createdBy" TEXT NOT NULL,
-    "boughtBy" TEXT NOT NULL DEFAULT 'N/A',
-    "soldBy" TEXT NOT NULL DEFAULT 'N/A',
-    "borrowedBy" TEXT NOT NULL DEFAULT 'N/A',
-    "lentBy" TEXT NOT NULL DEFAULT 'N/A',
 
     CONSTRAINT "Product_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Record" (
+    "id" SERIAL NOT NULL,
+    "productId" INTEGER NOT NULL,
+    "userId" INTEGER NOT NULL,
+    "recordType" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "Record_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
@@ -35,3 +42,12 @@ CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_phoneNumber_key" ON "User"("phoneNumber");
+
+-- AddForeignKey
+ALTER TABLE "Product" ADD CONSTRAINT "Product_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Record" ADD CONSTRAINT "Record_productId_fkey" FOREIGN KEY ("productId") REFERENCES "Product"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Record" ADD CONSTRAINT "Record_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
