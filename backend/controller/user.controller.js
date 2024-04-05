@@ -2,7 +2,7 @@ import prisma from "../db/db.config.js";
 
 export const createUser = async (req, res) => {
   try {
-    const data = req.body;
+    const user = req.body;
 
     const findUser = await prisma.user.findFirst({
       where: {
