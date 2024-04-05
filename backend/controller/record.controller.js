@@ -23,7 +23,12 @@ export const createRecord = async (req, res) => {
 
 export const getRecords = async (req, res) => {
   try {
-    const result = await prisma.record.findMany({});
+    const result = await prisma.record.findMany({
+      include: {
+        product: true,
+        user: true,
+      },
+    });
 
     return res.json({
       status: 200,
