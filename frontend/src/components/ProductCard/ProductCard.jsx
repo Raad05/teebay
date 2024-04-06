@@ -24,16 +24,19 @@ const ProductCard = ({ product, path }) => {
           </button>
         )}
       </div>
-      <div className="flex text-gray-500">
-        <p className="mr-2">Categories:</p>
-        {categories.map((category, idx) => (
-          <p key={idx}>{category}, </p>
-        ))}
-      </div>
-      <div className="flex text-gray-500">
-        <p className="mr-1">Price: ${sellingPrice}</p>|
-        <p className="ml-1">Rent: ${rentingPrice}</p>
-      </div>
+      <p className="text-gray-500">
+        Categories:{" "}
+        {categories.map((category, idx) =>
+          idx === categories.length - 1 ? (
+            <span key={idx}>{category}</span>
+          ) : (
+            <span key={idx}>{category}, </span>
+          )
+        )}
+      </p>
+      <p className="mr-1">
+        Price: ${sellingPrice} | Rent: ${rentingPrice}
+      </p>
       <p className="my-3">{description}</p>
       {path !== "records" && (
         <div className="flex justify-between my-5 text-gray-500">
