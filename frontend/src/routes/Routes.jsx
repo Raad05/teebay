@@ -5,6 +5,7 @@ import Signup from "../components/Auth/Signup/Signup";
 import AllProducts from "../components/AllProducts/AllProducts";
 import MyProducts from "../components/MyProducts/MyProducts";
 import Records from "../components/Records/Records";
+import MultiPageForm from "../components/MultiPageForm/MultiPageForm";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "/records",
         element: <Records></Records>,
+      },
+      {
+        path: "/create-product",
+        element: <MultiPageForm></MultiPageForm>,
       },
     ],
   },

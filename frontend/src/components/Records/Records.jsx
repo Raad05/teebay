@@ -33,7 +33,7 @@ const products = [
 const Records = () => {
   return (
     <div className="records mt-20">
-      <h3 className="text-3xl text-center my-10">ALL PRODUCTS</h3>
+      <h3 className="text-3xl text-center my-10">USER HISTORY</h3>
       {products.map((product, idx) => (
         <ProductCard key={idx} product={product} path="records"></ProductCard>
       ))}
