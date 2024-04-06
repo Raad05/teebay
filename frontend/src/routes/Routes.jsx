@@ -4,6 +4,7 @@ import Login from "../components/Auth/Login/Login";
 import Signup from "../components/Auth/Signup/Signup";
 import AllProducts from "../components/AllProducts/AllProducts";
 import MyProducts from "../components/MyProducts/MyProducts";
+import Records from "../components/Records/Records";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: "/my-products",
         element: <MyProducts></MyProducts>,
+      },
+      {
+        path: "/records",
+        element: <Records></Records>,
       },
     ],
   },
