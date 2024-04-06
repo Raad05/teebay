@@ -35,7 +35,11 @@ const MyProducts = () => {
     <div className="my-products mt-20">
       <h3 className="text-3xl text-center my-10">MY PRODUCTS</h3>
       {products.map((product, idx) => (
-        <ProductCard key={idx} product={product}></ProductCard>
+        <ProductCard
+          key={idx}
+          product={product}
+          path="myProducts"
+        ></ProductCard>
       ))}
     </div>
   );
