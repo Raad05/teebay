@@ -11,6 +11,15 @@ const ProductCard = ({ product, path }) => {
     createdAt,
     views,
   } = product;
+
+  const datePosted = new Date(createdAt);
+  const dateOptions = {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  };
+  const formattedDate = datePosted.toLocaleDateString("en-US", dateOptions);
+
   return (
     <div className="product-card border w-1/2 p-10 m-auto my-5">
       <div className="flex justify-between">
@@ -40,7 +49,7 @@ const ProductCard = ({ product, path }) => {
       <p className="my-3">{description}</p>
       {path !== "records" && (
         <div className="flex justify-between my-5 text-gray-500">
-          <p>Date posted: {createdAt}</p>
+          <p>Date posted: {formattedDate}</p>
           <p>{views} views</p>
         </div>
       )}
