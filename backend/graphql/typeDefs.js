@@ -1,7 +1,7 @@
 const typeDefs = `#graphql
 # types
 type User {
-  id: ID!
+  id: Int!
   products: [Product!]!
   records: [Record!]!
   firstName: String!
@@ -13,7 +13,7 @@ type User {
 }
 
 type Product {
-  id: ID!
+  id: Int!
   user: User!
   records: [Record!]!
   userId: Int!
@@ -23,19 +23,19 @@ type Product {
   sellingPrice: Int!
   rentingPrice: Int!
   views: Int!
-  createdAt: String!
-  startDate: String
-  endDate: String
+  createdAt: DateTime!
+  startDate: DateTime
+  endDate: DateTime
 }
 
 type Record {
-  id: ID!
+  id: Int!
   product: Product!
   productId: Int!
   user: User!
   userId: Int!
   status: String!
-  createdAt: String!
+  createdAt: DateTime!
 }
 
 # inputs
@@ -48,6 +48,15 @@ input CreateUserInput {
   password: String!
 }
 
+input CreateProductInput {
+  userId: Int!
+  name: String!
+  description: String!
+  categories: [String!]!
+  sellingPrice: Int!
+  rentingPrice: Int!
+}
+
 # queries
 type Query {
     products: [Product]
@@ -57,7 +66,10 @@ type Query {
 # mutations
 type Mutation {
   createUser(input: CreateUserInput!): User
+  createProduct(input: CreateProductInput!): Product
 }
+
+scalar DateTime
 `;
 
 export default typeDefs;

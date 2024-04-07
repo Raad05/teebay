@@ -1,42 +1,19 @@
 import prisma from "../db/db.config.js";
 
-export const createProduct = async (req, res) => {
-  try {
-    const product = req.body;
+export const createProduct = async (input) => {
+  const product = input;
 
-    const newProduct = await prisma.product.create({
-      data: product,
-    });
+  const newProduct = await prisma.product.create({
+    data: product,
+  });
 
-    return res.json({
-      status: 200,
-      data: newProduct,
-      message: "Product created successfully!",
-    });
-  } catch (e) {
-    return res.json({
-      status: 400,
-      message: "Failed to create product.",
-      error: e,
-    });
-  }
+  return newProduct;
 };
 
 export const getAllProducts = async (req, res) => {
-  try {
-    const result = await prisma.product.findMany({});
+  const result = await prisma.product.findMany({});
 
-    return res.json({
-      status: 200,
-      data: result,
-    });
-  } catch (e) {
-    return res.json({
-      status: 400,
-      message: "Failed to fetch products.",
-      error: e,
-    });
-  }
+  return result;
 };
 
 export const getProductById = async (req, res) => {
@@ -48,16 +25,16 @@ export const getProductById = async (req, res) => {
       },
     });
 
-    return res.json({
+    return {
       status: 200,
       data: result,
-    });
+    };
   } catch (e) {
-    return res.json({
+    return {
       status: 400,
       message: "Failed to fetch products",
       error: e,
-    });
+    };
   }
 };
 
@@ -71,16 +48,16 @@ export const deleteProduct = async (req, res) => {
       },
     });
 
-    return res.json({
+    return {
       status: 200,
       message: "Product deleted successfully!",
-    });
+    };
   } catch (e) {
-    return res.json({
+    return {
       status: 400,
       message: "Failed to delete product.",
       error: e,
-    });
+    };
   }
 };
 
@@ -96,16 +73,16 @@ export const updateProduct = async (req, res) => {
       data: data,
     });
 
-    return res.json({
+    return {
       status: 200,
       data: updatedProduct,
       message: "Product updated successfully!",
-    });
+    };
   } catch (e) {
-    return res.json({
+    return {
       status: 400,
       message: "Failed to update product.",
       error: e,
-    });
+    };
   }
 };
