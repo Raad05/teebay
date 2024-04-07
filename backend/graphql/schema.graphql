@@ -1,4 +1,3 @@
-const typeDefs = `#graphql
 # types
 type User {
   id: Int!
@@ -40,8 +39,8 @@ type Record {
 
 # queries
 type Query {
-    products: [Product]
-    records: [Record]
+  products: [Product]
+  records: [Record]
 }
 
 # inputs
@@ -76,6 +75,3 @@ type Mutation {
 }
 
 scalar DateTime
-`;
-
-export default typeDefs;
