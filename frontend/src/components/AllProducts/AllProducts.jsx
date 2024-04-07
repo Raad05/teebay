@@ -17,11 +17,7 @@ const PRODUCTS = gql`
 `;
 
 const AllProducts = () => {
-  const { loading, error, data } = useQuery(PRODUCTS);
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
-  console.log(data.products);
+  const { data } = useQuery(PRODUCTS);
 
   return (
     <div className="all-products mt-20">
