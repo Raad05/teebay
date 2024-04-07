@@ -1,26 +1,26 @@
 import prisma from "../db/db.config.js";
 
-export const createUser = async (req, res) => {
+export const createUser = async (input, _, res) => {
   try {
-    const user = req.body;
+    const user = input;
 
     const findUser = await prisma.user.findFirst({
       where: {
-        OR: [{ email: data.email }, { phoneNumber: data.phoneNumber }],
+        OR: [{ email: user.email }, { phoneNumber: user.phoneNumber }],
       },
     });
 
     if (findUser) {
-      if (findUser.email === data.email) {
-        return res.json({
+      if (findUser.email === user.email) {
+        return {
           status: 400,
           message: "Email already exists.",
-        });
+        };
       } else {
-        return res.json({
+        return {
           status: 400,
           message: "Phone number already in use.",
-        });
+        };
       }
     }
 
@@ -28,17 +28,17 @@ export const createUser = async (req, res) => {
       data: user,
     });
 
-    return res.json({
+    return {
       status: 200,
       data: newUser,
       message: "User created successfully!",
-    });
+    };
   } catch (e) {
-    return res.json({
+    return {
       status: 400,
       message: "Failed to create new user.",
       error: e,
-    });
+    };
   }
 };
 
@@ -54,14 +54,14 @@ export const loginUser = async (req, res) => {
     });
 
     if (result) {
-      return res.json({ status: 200, message: "Login successful!" });
+      return { status: 200, message: "Login successful!" };
     } else {
-      return res.json({
+      return {
         status: 400,
         message: "Email or password doesn't match.",
-      });
+      };
     }
   } catch (e) {
-    return res.json({ status: 400, message: "Failed to login.", error: e });
+    return { status: 400, message: "Failed to login.", error: e };
   }
 };
