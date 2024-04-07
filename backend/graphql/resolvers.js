@@ -2,7 +2,7 @@ import {
   createProduct,
   getAllProducts,
 } from "../controller/product.controller.js";
-import { createUser } from "../controller/user.controller.js";
+import { createUser, loginUser } from "../controller/user.controller.js";
 
 const resolvers = {
   // queries
@@ -31,6 +31,15 @@ const resolvers = {
     createProduct: async (_, { input }, __) => {
       try {
         const response = await createProduct(input);
+        return response;
+      } catch (e) {
+        throw new Error(e);
+      }
+    },
+    loginUser: async (_, { input }, __) => {
+      try {
+        const response = await loginUser(input);
+
         return response;
       } catch (e) {
         throw new Error(e);

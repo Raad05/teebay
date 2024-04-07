@@ -38,6 +38,12 @@ type Record {
   createdAt: DateTime!
 }
 
+# queries
+type Query {
+    products: [Product]
+    records: [Record]
+}
+
 # inputs
 input CreateUserInput {
   firstName: String!
@@ -57,15 +63,15 @@ input CreateProductInput {
   rentingPrice: Int!
 }
 
-# queries
-type Query {
-    products: [Product]
-    records: [Record]
+input LoginUserInput {
+  email: String!
+  password: String!
 }
 
 # mutations
 type Mutation {
   createUser(input: CreateUserInput!): User
+  loginUser(input: LoginUserInput!): String
   createProduct(input: CreateProductInput!): Product
 }
 

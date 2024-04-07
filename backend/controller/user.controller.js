@@ -24,26 +24,19 @@ export const createUser = async (input) => {
   return newUser;
 };
 
-export const loginUser = async (req, res) => {
-  try {
-    const { email, password } = req.body;
+export const loginUser = async (input) => {
+  const { email, password } = input;
 
-    const result = await prisma.user.findFirst({
-      where: {
-        email: email,
-        password: password,
-      },
-    });
+  const result = await prisma.user.findFirst({
+    where: {
+      email: email,
+      password: password,
+    },
+  });
 
-    if (result) {
-      return { status: 200, message: "Login successful!" };
-    } else {
-      return {
-        status: 400,
-        message: "Email or password doesn't match.",
-      };
-    }
-  } catch (e) {
-    return { status: 400, message: "Failed to login.", error: e };
+  if (result) {
+    return "Login successful!";
+  } else {
+    throw new Error("Email or password doesn't match");
   }
 };
