@@ -10,7 +10,7 @@ export const createProduct = async (input) => {
   return newProduct;
 };
 
-export const getAllProducts = async (req, res) => {
+export const getAllProducts = async () => {
   const result = await prisma.product.findMany({});
 
   return result;
