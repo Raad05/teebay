@@ -1,4 +1,6 @@
+import { gql, useMutation } from "@apollo/client";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 
 const categoryOptions = [
@@ -28,10 +30,22 @@ const categoryOptions = [
   },
 ];
 
+const CREATE_PRODUCT = gql`
+  mutation CreateProduct($input: CreateProductInput!) {
+    createProduct(input: $input) {
+      id
+      name
+      description
+    }
+  }
+`;
+
 const CreateProduct = () => {
-  const [data, setData] = useState({});
+  const [formData, setFormData] = useState({});
   const [page, setPage] = useState(1);
   const [categories, setCategories] = useState([]);
+  const [createProduct] = useMutation(CREATE_PRODUCT);
+  const navigate = useNavigate();
 
   const nextPage = () => {
     setPage((prevPage) => prevPage + 1);
@@ -41,13 +55,33 @@ const CreateProduct = () => {
     setPage((prevPage) => prevPage - 1);
   };
 
-  const handleSubmit = () => {
-    console.log(data);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const userId = JSON.parse(localStorage.getItem("user")).id;
+
+    const sellingPrice = parseInt(formData.sellingPrice);
+    const rentingPrice = parseInt(formData.rentingPrice);
+
+    const dataBlob = {
+      userId,
+      ...formData,
+      sellingPrice,
+      rentingPrice,
+    };
+    try {
+      await createProduct({ variables: { input: dataBlob } });
+      alert("Product created successfully");
+      navigate("/my-products");
+    } catch (e) {
+      alert(e.message);
+      console.log(e);
+    }
+    // console.log(dataBlob);
   };
 
   const handleInput = (e) => {
     const { name, value } = e.target;
-    setData((prevData) => ({
+    setFormData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
@@ -55,7 +89,7 @@ const CreateProduct = () => {
 
   const handleOptionInput = (options) => {
     setCategories(options);
-    setData((prevData) => ({
+    setFormData((prevData) => ({
       ...prevData,
       categories: options.map((option) => option.value),
     }));
@@ -175,10 +209,10 @@ const CreateProduct = () => {
         return (
           <div className="w-1/2 m-auto mt-40 text-xl">
             <h3 className="text-3xl my-5">Summary:</h3>
-            <p className="my-2">Title: {data.name}</p>
+            <p className="my-2">Title: {formData.name}</p>
             <p className="my-2">
               Categories:{" "}
-              {data.categories.map((category, idx) =>
+              {formData.categories.map((category, idx) =>
                 idx === categories.length - 1 ? (
                   <span className="my-2" key={idx}>
                     {category}
@@ -190,9 +224,10 @@ const CreateProduct = () => {
                 )
               )}
             </p>
-            <p className="my-2">Description: {data.description}</p>
+            <p className="my-2">Description: {formData.description}</p>
             <p className="my-2">
-              Price: ${data.sellingPrice} | To Rent: ${data.rentingPrice}
+              Price: ${formData.sellingPrice} | To Rent: $
+              {formData.rentingPrice}
             </p>
             <div>
               <button
@@ -206,7 +241,7 @@ const CreateProduct = () => {
                 className="bg-purple-500 px-3 py-2 text-white rounded mx-2 my-5"
                 onClick={handleSubmit}
               >
-                Submit
+                Create
               </button>
             </div>
           </div>
