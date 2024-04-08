@@ -17,6 +17,7 @@ const ProductCard = ({ product, path }) => {
     sellingPrice,
     rentingPrice,
     createdAt,
+    status,
     views,
   } = product;
   const [deleteProduct] = useMutation(DELETE_PRODUCT);
@@ -45,6 +46,11 @@ const ProductCard = ({ product, path }) => {
     <div className="product-card border w-1/2 p-10 m-auto my-5">
       <div className="flex justify-between">
         <p className="text-xl font-bold">{name}</p>
+        {status === "sold" && (
+          <p className="text-xl border-2 border-red-400 text-red-400 p-2 rounded font-bold">
+            SOLD
+          </p>
+        )}
         {path === "myProducts" && (
           <button
             onClick={() => document.getElementById("my_modal_1").showModal()}
@@ -67,7 +73,10 @@ const ProductCard = ({ product, path }) => {
       <p>
         Price: ${sellingPrice} | Rent: ${rentingPrice}
       </p>
-      <p className="my-3">{description}</p>
+      <p className="my-3">
+        {description.slice(0, 200)}{" "}
+        <span className="text-blue-400">Read more...</span>
+      </p>
       {path !== "records" && (
         <div className="flex justify-between my-5 text-gray-500">
           <p>Date posted: {formattedDate}</p>

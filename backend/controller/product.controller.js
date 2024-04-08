@@ -36,28 +36,26 @@ export const deleteProduct = async (id) => {
   return true;
 };
 
-export const updateProduct = async (req, res) => {
-  try {
-    const productId = req.params.id;
-    const data = req.body;
+export const updateProduct = async (input) => {
+  const updatedProduct = await prisma.product.update({
+    where: {
+      id: input.id,
+    },
+    data: data,
+  });
 
-    const updatedProduct = await prisma.product.update({
-      where: {
-        id: Number(productId),
-      },
-      data: data,
-    });
+  return updatedProduct;
+};
 
-    return {
-      status: 200,
-      data: updatedProduct,
-      message: "Product updated successfully!",
-    };
-  } catch (e) {
-    return {
-      status: 400,
-      message: "Failed to update product.",
-      error: e,
-    };
-  }
+export const buyProduct = async (id) => {
+  const updatedStatus = await prisma.product.update({
+    where: {
+      id: id,
+    },
+    data: {
+      status: "sold",
+    },
+  });
+
+  return updatedStatus;
 };

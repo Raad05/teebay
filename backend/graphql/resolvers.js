@@ -1,4 +1,5 @@
 import {
+  buyProduct,
   createProduct,
   deleteProduct,
   getAllProducts,
@@ -59,6 +60,15 @@ const resolvers = {
     deleteProduct: async (_, { id }) => {
       try {
         const response = await deleteProduct(id);
+
+        return response;
+      } catch (e) {
+        throw new Error(e);
+      }
+    },
+    buyProduct: async (_, { id }) => {
+      try {
+        const response = await buyProduct(id);
 
         return response;
       } catch (e) {

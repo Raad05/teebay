@@ -21,6 +21,7 @@ CREATE TABLE "Product" (
     "sellingPrice" INTEGER NOT NULL,
     "rentingPrice" INTEGER NOT NULL,
     "views" INTEGER NOT NULL DEFAULT 0,
+    "status" TEXT,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "startDate" TIMESTAMP(3),
     "endDate" TIMESTAMP(3),
@@ -33,7 +34,6 @@ CREATE TABLE "Record" (
     "id" SERIAL NOT NULL,
     "productId" INTEGER NOT NULL,
     "userId" INTEGER NOT NULL,
-    "status" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Record_pkey" PRIMARY KEY ("id")

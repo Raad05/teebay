@@ -22,6 +22,7 @@ type Product {
   sellingPrice: Int!
   rentingPrice: Int!
   views: Int!
+  status: String
   createdAt: DateTime!
   startDate: DateTime
   endDate: DateTime
@@ -68,12 +69,17 @@ input LoginUserInput {
   password: String!
 }
 
+input BuyProductInput {
+  id: Int!
+}
+
 # mutations
 type Mutation {
   createUser(input: CreateUserInput!): User
   loginUser(input: LoginUserInput!): User
   createProduct(input: CreateProductInput!): Product
   deleteProduct(id: Int!): Boolean
+  buyProduct(id: Int!): Product
 }
 
 scalar DateTime

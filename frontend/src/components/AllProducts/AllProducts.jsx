@@ -12,6 +12,7 @@ const PRODUCTS = gql`
       sellingPrice
       rentingPrice
       createdAt
+      status
       views
     }
   }
