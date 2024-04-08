@@ -2,7 +2,7 @@
 
 TeeBay is an online plaform to buy, sell and rent products of different niches from verified users.
 
-- Demo link:
+- Demo link: https://drive.google.com/file/d/1HilAclAn2vRndhQBSD3qxEKJAfGhyG7j/view?usp=sharing
 
 Note: The overall project is created maintaining best software practices and code reusability in order to prevent redundancy within the codebase.
 
