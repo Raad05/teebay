@@ -1,8 +1,16 @@
 /* eslint-disable react/prop-types */
+import { gql, useMutation } from "@apollo/client";
 import { MdDelete } from "react-icons/md";
+
+const DELETE_PRODUCT = gql`
+  mutation DeleteProduct($id: Int!) {
+    deleteProduct(id: $id)
+  }
+`;
 
 const ProductCard = ({ product, path }) => {
   const {
+    id,
     name,
     description,
     categories,
@@ -11,6 +19,7 @@ const ProductCard = ({ product, path }) => {
     createdAt,
     views,
   } = product;
+  const [deleteProduct] = useMutation(DELETE_PRODUCT);
 
   const datePosted = new Date(createdAt);
   const dateOptions = {
@@ -19,6 +28,18 @@ const ProductCard = ({ product, path }) => {
     year: "numeric",
   };
   const formattedDate = datePosted.toLocaleDateString("en-US", dateOptions);
+
+  const onDelete = async (e) => {
+    e.preventDefault();
+    try {
+      await deleteProduct({ variables: { id: id } });
+      alert("Prouduct deleted successfully");
+      window.location.reload();
+    } catch (e) {
+      alert(e.message);
+      console.log(e);
+    }
+  };
 
   return (
     <div className="product-card border w-1/2 p-10 m-auto my-5">
@@ -64,7 +85,10 @@ const ProductCard = ({ product, path }) => {
               <button className="px-5 py-2 rounded bg-red-500 mx-2 font-bold text-white">
                 No
               </button>
-              <button className="px-5 py-2 rounded bg-purple-600 mx-2 font-bold text-white">
+              <button
+                onClick={onDelete}
+                className="px-5 py-2 rounded bg-purple-600 mx-2 font-bold text-white"
+              >
                 Yes
               </button>
             </form>
