@@ -35,7 +35,7 @@ export const loginUser = async (input) => {
   });
 
   if (result) {
-    return "Login successful!";
+    return result;
   } else {
     throw new Error("Email or password doesn't match");
   }

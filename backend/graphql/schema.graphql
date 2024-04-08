@@ -70,7 +70,7 @@ input LoginUserInput {
 # mutations
 type Mutation {
   createUser(input: CreateUserInput!): User
-  loginUser(input: LoginUserInput!): String
+  loginUser(input: LoginUserInput!): User
   createProduct(input: CreateProductInput!): Product
 }
 

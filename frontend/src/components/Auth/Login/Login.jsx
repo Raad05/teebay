@@ -1,23 +1,32 @@
 /* eslint-disable react/no-unescaped-entities */
 import { gql, useMutation } from "@apollo/client";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const LOGIN_USER = gql`
   mutation login($input: LoginUserInput!) {
-    loginUser(input: $input)
+    loginUser(input: $input) {
+      id
+      firstName
+      lastName
+      email
+    }
   }
 `;
 
 const Login = () => {
   const [formData, setFormData] = useState({});
   const [loginUser] = useMutation(LOGIN_USER);
+  const navigate = useNavigate();
 
-  const signIn = async () => {
+  const signIn = async (e) => {
     try {
-      await loginUser({ variables: { input: formData } });
+      e.preventDefault();
+      const response = await loginUser({ variables: { input: formData } });
+      localStorage.setItem("user", JSON.stringify(response.data.loginUser));
+      navigate("/products");
     } catch (e) {
-      alert("Failed to login");
+      alert(e.message);
       console.log(e);
     }
   };
