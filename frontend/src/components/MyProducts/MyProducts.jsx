@@ -26,15 +26,22 @@ const MyProducts = () => {
   return (
     <div className="my-products mt-20">
       <h3 className="text-3xl text-center my-10">MY PRODUCTS</h3>
-      {data.products
-        .filter((product) => product.userId === userId)
-        .map((product, idx) => (
-          <ProductCard
-            key={idx}
-            product={product}
-            path="myProducts"
-          ></ProductCard>
-        ))}
+      {data.products.filter((product) => product.userId === userId).length >
+      0 ? (
+        data.products
+          .filter((product) => product.userId === userId)
+          .map((product, idx) => (
+            <ProductCard
+              key={idx}
+              product={product}
+              path="myProducts"
+            ></ProductCard>
+          ))
+      ) : (
+        <p className="text-2xl text-center mt-40 text-gray-400">
+          You do not own any products
+        </p>
+      )}
     </div>
   );
 };

@@ -6,6 +6,7 @@ import AllProducts from "../components/AllProducts/AllProducts";
 import MyProducts from "../components/MyProducts/MyProducts";
 import Records from "../components/Records/Records";
 import CreateProduct from "../components/MultiPageForm/CreateProduct";
+import ProductDetails from "../components/ProductDetails/ProductDetails";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       {
         path: "/products",
         element: <AllProducts></AllProducts>,
+      },
+      {
+        path: "/products/:id",
+        element: <ProductDetails></ProductDetails>,
       },
       {
         path: "/my-products",

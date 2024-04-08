@@ -64,7 +64,7 @@ const ProductCard = ({ product, path }) => {
           )
         )}
       </p>
-      <p className="mr-1">
+      <p>
         Price: ${sellingPrice} | Rent: ${rentingPrice}
       </p>
       <p className="my-3">{description}</p>
