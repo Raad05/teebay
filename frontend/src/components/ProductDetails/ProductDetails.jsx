@@ -26,7 +26,7 @@ const ProductDetails = () => {
   const product = data.product;
 
   return (
-    <div className="product-details">
+    <div className="product-details w-1/2 mx-auto mt-20">
       <p className="text-xl font-bold">{product.name}</p>
       <p className="text-gray-500">
         Categories:{" "}
@@ -42,7 +42,7 @@ const ProductDetails = () => {
         Price: ${product.sellingPrice} | Rent: ${product.rentingPrice}
       </p>
       <p className="my-3">{product.description}</p>
-      <div className="flex justify-end">
+      <div className="flex justify-end my-10">
         <button className="m-3 text-white bg-purple-600 px-4 py-2 rounded">
           Buy
         </button>
