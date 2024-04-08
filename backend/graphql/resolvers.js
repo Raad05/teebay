@@ -2,6 +2,7 @@ import {
   createProduct,
   deleteProduct,
   getAllProducts,
+  getProductById,
 } from "../controller/product.controller.js";
 import { createUser, loginUser } from "../controller/user.controller.js";
 
@@ -11,6 +12,15 @@ const resolvers = {
     products: async () => {
       try {
         const response = await getAllProducts();
+
+        return response;
+      } catch (e) {
+        throw new Error(e);
+      }
+    },
+    product: async (_, { id }) => {
+      try {
+        const response = await getProductById(id);
 
         return response;
       } catch (e) {
@@ -29,18 +39,18 @@ const resolvers = {
         throw new Error(e);
       }
     },
-    createProduct: async (_, { input }) => {
+    loginUser: async (_, { input }) => {
       try {
-        const response = await createProduct(input);
+        const response = await loginUser(input);
+
         return response;
       } catch (e) {
         throw new Error(e);
       }
     },
-    loginUser: async (_, { input }) => {
+    createProduct: async (_, { input }) => {
       try {
-        const response = await loginUser(input);
-
+        const response = await createProduct(input);
         return response;
       } catch (e) {
         throw new Error(e);

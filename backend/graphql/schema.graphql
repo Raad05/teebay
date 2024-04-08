@@ -40,6 +40,7 @@ type Record {
 # queries
 type Query {
   products: [Product]
+  product(id: Int!): Product
   records: [Record]
 }
 

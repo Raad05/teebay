@@ -16,26 +16,14 @@ export const getAllProducts = async () => {
   return result;
 };
 
-export const getProductById = async (req, res) => {
-  try {
-    const productId = req.params.id;
-    const result = await prisma.product.findUnique({
-      where: {
-        id: Number(productId),
-      },
-    });
+export const getProductById = async (id) => {
+  const result = await prisma.product.findUnique({
+    where: {
+      id: id,
+    },
+  });
 
-    return {
-      status: 200,
-      data: result,
-    };
-  } catch (e) {
-    return {
-      status: 400,
-      message: "Failed to fetch products",
-      error: e,
-    };
-  }
+  return result;
 };
 
 export const deleteProduct = async (id) => {
