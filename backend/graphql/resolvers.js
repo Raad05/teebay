@@ -1,5 +1,6 @@
 import {
   createProduct,
+  deleteProduct,
   getAllProducts,
 } from "../controller/product.controller.js";
 import { createUser, loginUser } from "../controller/user.controller.js";
@@ -39,6 +40,15 @@ const resolvers = {
     loginUser: async (_, { input }) => {
       try {
         const response = await loginUser(input);
+
+        return response;
+      } catch (e) {
+        throw new Error(e);
+      }
+    },
+    deleteProduct: async (_, { id }) => {
+      try {
+        const response = await deleteProduct(id);
 
         return response;
       } catch (e) {
