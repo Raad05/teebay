@@ -72,6 +72,7 @@ const CreateProduct = () => {
       await createProduct({ variables: { input: dataBlob } });
       alert("Product created successfully");
       navigate("/my-products");
+      window.location.reload();
     } catch (e) {
       alert(e.message);
       console.log(e);

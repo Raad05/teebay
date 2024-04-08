@@ -38,12 +38,6 @@ const ProductDetails = () => {
   const product = data.product;
   const userId = JSON.parse(localStorage.getItem("user")).id;
 
-  console.log(product.status);
-  console.log(
-    "Condition result:",
-    product.userId !== userId || product.status !== "sold"
-  );
-
   const onBuy = async (e) => {
     e.preventDefault();
     try {

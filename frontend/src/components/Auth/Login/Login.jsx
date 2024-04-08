@@ -25,6 +25,7 @@ const Login = () => {
       const response = await loginUser({ variables: { input: formData } });
       localStorage.setItem("user", JSON.stringify(response.data.loginUser));
       navigate("/products");
+      window.location.reload();
     } catch (e) {
       alert(e.message);
       console.log(e);
