@@ -20,8 +20,8 @@ const Login = () => {
   const navigate = useNavigate();
 
   const signIn = async (e) => {
+    e.preventDefault();
     try {
-      e.preventDefault();
       const response = await loginUser({ variables: { input: formData } });
       localStorage.setItem("user", JSON.stringify(response.data.loginUser));
       navigate("/products");

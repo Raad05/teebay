@@ -26,12 +26,20 @@ const Navbar = () => {
           ALL PRODUCTS
         </Link>
         {loggedUser && (
-          <Link
-            to="/my-products"
-            className="mx-2 font-bold p-2 border-2 border-black rounded"
-          >
-            MY PRODUCTS
-          </Link>
+          <>
+            <Link
+              to="/my-products"
+              className="mx-2 font-bold p-2 border-2 border-black rounded"
+            >
+              MY PRODUCTS
+            </Link>
+            <Link
+              to="/create-product"
+              className="mx-2 font-bold p-2 border-2 border-black rounded"
+            >
+              CREATE PRODUCT
+            </Link>
+          </>
         )}
       </div>
       {loggedUser ? (

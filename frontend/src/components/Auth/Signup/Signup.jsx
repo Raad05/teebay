@@ -1,6 +1,6 @@
 import { gql, useMutation } from "@apollo/client";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SIGNUP = gql`
   mutation Signup($input: CreateUserInput!) {
@@ -17,12 +17,16 @@ const Signup = () => {
   const [formData, setFormData] = useState({});
   const [isMatched, setIsMatched] = useState("");
   const [createUser] = useMutation(SIGNUP);
+  const navigate = useNavigate();
 
-  const signup = async () => {
+  const signup = async (e) => {
+    e.preventDefault();
     try {
       await createUser({ variables: { input: formData } });
+      alert("Signup successful");
+      navigate("/");
     } catch (e) {
-      alert("Failed to signup");
+      alert(e.message);
       console.log(e);
     }
   };
